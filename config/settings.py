@@ -159,3 +159,5 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False,  # Отключаем cookie-based auth, если не нужно
 }
+
+SWAGGER_USE_COMPAT_RENDERERS = False
