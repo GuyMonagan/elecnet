@@ -12,7 +12,7 @@ def test_non_staff_user_cannot_access_api():
     # создаём обычного пользователя
     user = User.objects.create_user(
         email="normie@example.com",
-        password="test123",
+        password="dummy",
         is_active=True,  # активный, но не staff
         is_staff=False,
     )
@@ -30,7 +30,7 @@ def test_staff_user_can_access_api():
     Ensure active staff users can access protected API endpoints.
     """
     staff_user = User.objects.create_user(
-        email="admin@example.com", password="test123", is_active=True, is_staff=True
+        email="admin@example.com", password="dummy", is_active=True, is_staff=True
     )
 
     client = APIClient()
@@ -47,7 +47,7 @@ def test_inactive_staff_user_cannot_access_api():
     """
     user = User.objects.create_user(
         email="ghost@example.com",
-        password="test123",
+        password="dummy",
         is_active=False,
         is_staff=True,
     )
