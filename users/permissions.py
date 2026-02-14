@@ -2,6 +2,9 @@ from rest_framework.permissions import BasePermission
 
 
 class IsActiveStaff(BasePermission):
+    """
+    Allow access only to authenticated, active staff users.
+    """
     def has_permission(self, request, view):
         return bool(
             request.user
