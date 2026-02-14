@@ -1,19 +1,28 @@
 from rest_framework import serializers
+
 from .models import BusinessUnit, Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Product model.
+    """
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = "__all__"
 
 
 class BusinessUnitSerializer(serializers.ModelSerializer):
+    """
+    Serializer for BusinessUnit model.
+    Debt field is read-only via API.
+    """
+    debt_to_supplier = serializers.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        read_only=True
+    )
+
     class Meta:
         model = BusinessUnit
-        exclude = ('debt_to_supplier',)  # нельзя изменять через API
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['debt_to_supplier'] = str(instance.debt_to_supplier)  # только read-only
-        return data
+        fields = "__all__"
